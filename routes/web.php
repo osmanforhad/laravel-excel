@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- Route::get('/', [ExcelexampleController::class, 'index']);
+ Route::get('/', [ExcelexampleController::class, 'index'])->name('/');
  Route::get('/export', [ExcelexampleController::class, 'export'])->name('export');
-
-//  Route::get('/import', [ExcelexampleController::class, 'import'])->name('import');
+ Route::post('/import', [ExcelexampleController::class, 'import'])->name('import');

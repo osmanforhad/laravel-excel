@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Exports\ExcelExampleExport;
+use App\Imports\ExcelExampleImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,19 @@ class ExcelexampleController extends Controller
 
     public function import(Request $request)
     {
-
+      $import =  Excel::import(new ExcelExampleImport, $request->file('import_file'));
+      if($import)
+      {
+          $notification = array(
+              'message' => 'Product Imported Successfully.',
+              'alert-type' => 'success'
+          );
+          return redirect()->route('/')->with($notification);
+      }
+      else{
+          return redirect()->back();
+      }
+        
     }
+
 }
